@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { ArrowRightLeft, Users, DollarSign, Heart } from 'lucide-react';
 import { useMedicareLanguage } from '../../contexts/MedicareLanguageContext';
 
@@ -29,7 +29,7 @@ export default function MedicareBenefits() {
   ];
 
   return (
-    <div className="bg-gradient-to-b from-gray-50 to-white py-16">
+    <div className="bg-linear-to-b from-gray-50 to-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
@@ -42,7 +42,7 @@ export default function MedicareBenefits() {
               <div className="flow-root bg-white rounded-xl px-6 pb-8 shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
                 <div className="-mt-6">
                   <div>
-                    <span className="inline-flex items-center justify-center p-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-lg">
+                    <span className="inline-flex items-center justify-center p-4 bg-linear-to-br from-blue-500 to-blue-600 rounded-lg shadow-lg">
                       <benefit.icon className="h-7 w-7 text-white" aria-hidden="true" />
                     </span>
                   </div>

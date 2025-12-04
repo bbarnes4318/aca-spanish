@@ -1,18 +1,18 @@
-import React from 'react';
+
 import { useMedicareLanguage } from '../../contexts/MedicareLanguageContext';
 
 export default function MedicareHero() {
   const { t } = useMedicareLanguage();
 
   return (
-    <div className="relative bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900">
+    <div className="relative bg-linear-to-r from-blue-700 via-blue-800 to-blue-900">
       <div className="absolute inset-0">
         <img
           className="w-full h-full object-cover opacity-15"
           src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80"
           alt="Medical professionals"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-linear-to-r from-blue-700 via-blue-800 to-blue-900 mix-blend-multiply" />
       </div>
       <div className="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
         <div className="text-center">

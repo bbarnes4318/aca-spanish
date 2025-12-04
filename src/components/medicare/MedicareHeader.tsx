@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Shield, Languages } from 'lucide-react';
 import { useMedicareLanguage } from '../../contexts/MedicareLanguageContext';
 
