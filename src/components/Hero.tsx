@@ -1,6 +1,9 @@
 import React from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Hero() {
+  const { t } = useLanguage();
+
   return (
     <div className="relative bg-blue-700">
       <div className="absolute inset-0">
@@ -13,17 +16,17 @@ export default function Hero() {
       </div>
       <div className="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
         <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-          Secure Your Health Coverage Today
+          {t('hero.title')}
         </h1>
         <p className="mt-6 text-xl text-blue-100 max-w-3xl">
-          Don't wait until it's too late. Get affordable health insurance coverage under the Affordable Care Act and protect yourself and your loved ones.
+          {t('hero.subtitle')}
         </p>
         <div className="mt-10 flex space-x-4">
           <a
             href="tel:1-800-555-0123"
             className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
-            Call for Immediate Coverage
+            {t('hero.callButton')}
           </a>
         </div>
       </div>

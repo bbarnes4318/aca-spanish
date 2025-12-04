@@ -1,42 +1,45 @@
 import React from 'react';
 import { Shield, Heart, DollarSign, Clock } from 'lucide-react';
-
-const benefits = [
-  {
-    title: 'Comprehensive Coverage',
-    description: 'Get coverage for doctor visits, prescriptions, and preventive care',
-    icon: Shield,
-  },
-  {
-    title: 'Affordable Plans',
-    description: 'Find plans that fit your budget with possible subsidies',
-    icon: DollarSign,
-  },
-  {
-    title: 'Immediate Protection',
-    description: 'Get covered as soon as your first payment is processed',
-    icon: Clock,
-  },
-  {
-    title: 'Quality Care',
-    description: 'Access to top healthcare providers in your area',
-    icon: Heart,
-  },
-];
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Benefits() {
+  const { t } = useLanguage();
+
+  const benefits = [
+    {
+      titleKey: 'benefits.coverage.title',
+      descriptionKey: 'benefits.coverage.description',
+      icon: Shield,
+    },
+    {
+      titleKey: 'benefits.affordable.title',
+      descriptionKey: 'benefits.affordable.description',
+      icon: DollarSign,
+    },
+    {
+      titleKey: 'benefits.immediate.title',
+      descriptionKey: 'benefits.immediate.description',
+      icon: Clock,
+    },
+    {
+      titleKey: 'benefits.quality.title',
+      descriptionKey: 'benefits.quality.description',
+      icon: Heart,
+    },
+  ];
+
   return (
     <div className="bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-            Why Choose Health Coverage With Us?
+            {t('benefits.title')}
           </h2>
         </div>
         <div className="mt-10">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {benefits.map((benefit) => (
-              <div key={benefit.title} className="pt-6">
+            {benefits.map((benefit, index) => (
+              <div key={index} className="pt-6">
                 <div className="flow-root bg-white rounded-lg px-6 pb-8">
                   <div className="-mt-6">
                     <div>
@@ -45,9 +48,9 @@ export default function Benefits() {
                       </span>
                     </div>
                     <h3 className="mt-8 text-lg font-medium text-gray-900 tracking-tight">
-                      {benefit.title}
+                      {t(benefit.titleKey)}
                     </h3>
-                    <p className="mt-5 text-base text-gray-500">{benefit.description}</p>
+                    <p className="mt-5 text-base text-gray-500">{t(benefit.descriptionKey)}</p>
                   </div>
                 </div>
               </div>

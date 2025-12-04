@@ -7,6 +7,10 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: false,
     rollupOptions: {
+      input: {
+        main: './index.html',
+        medicare: './medicare.html'
+      },
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
