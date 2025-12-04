@@ -45,12 +45,62 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch(err => console.error('MongoDB Connection Error:', err));
 
 app.use(cors({
+  origin: [
+    'https://health-enrollment.xyz',
+    'https://buyertrend.org',
+    'https://monkfish-app-99vcw.ondigitalocean.app',
+    'http://localhost:5173',
+    process.env.FRONTEND_URL
+  ].filter(Boolean),
+  credentials: true
+}));
+
+app.use(express.json());
+
+// Serve static files from the frontend build directory
+app.use(express.static('frontend/dist'));
+
+app.post('/api/submit-lead', async (req, res) => {
+  try {
+    const { phone, tcpa_consent } = req.body;
+
+    if (!phone || !tcpa_consent) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    const lead = new Lead({
+      phone,
+      tcpa_consent
+    });
+
+    await lead.save();
+    res.status(201).json({ message: 'Lead submitted successfully', lead });
+  } catch (error) {
+    console.error('Error submitting lead:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.get('*', (req, res) => {
+  res.sendFile('index.html', { root: 'frontend/dist' });
+});
 
 app.listen(PORT, () => {
   console.log(\`Server running on port \${PORT}\`);
 });`,
 
   'backend/models/Lead.js': `import mongoose from 'mongoose';
+
+const leadSchema = new mongoose.Schema({
+  phone: {
+    type: String,
+    required: true
+  },
+  tcpa_consent: {
+    type: Boolean,
+    required: true
+  },
+  created_at: {
     type: Date,
     default: Date.now
   }
@@ -364,7 +414,7 @@ export default defineConfig({
   plugins: [react()],
 })`,
 
-  'frontend/.env': `VITE_API_URL=https://health-enrollment-api-63cf21dd6ef9.herokuapp.com`
+  'frontend/.env': `VITE_API_URL=/api`
 };
 
 // Write backend files
