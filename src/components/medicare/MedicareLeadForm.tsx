@@ -15,7 +15,6 @@ export default function MedicareLeadForm() {
     setIsSubmitting(true);
 
     try {
-      const leadidToken = document.getElementById('leadid_token')?.getAttribute('value') || '';
       
       const response = await fetch('/api/submit-lead', {
         method: 'POST',
@@ -27,7 +26,6 @@ export default function MedicareLeadForm() {
           lastName,
           phone,
           age: parseInt(age),
-          leadid_token: leadidToken,
           tcpa_consent: true
         }),
       });

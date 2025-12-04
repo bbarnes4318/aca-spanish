@@ -45,57 +45,12 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch(err => console.error('MongoDB Connection Error:', err));
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL || '*'
-}));
-app.use(express.json());
-
-app.post('/api/submit-lead', async (req, res) => {
-  try {
-    const { phone, leadid_token, tcpa_consent } = req.body;
-    
-    if (!phone || !leadid_token || tcpa_consent !== true) {
-      return res.status(400).json({ error: 'Missing required fields' });
-    }
-
-    const lead = await Lead.create({
-      phone,
-      leadid_token,
-      tcpa_consent,
-      timestamp: new Date()
-    });
-
-    res.json({
-      success: true,
-      lead_id: lead.leadid_token,
-      timestamp: lead.timestamp
-    });
-  } catch (error) {
-    console.error('Lead submission error:', error);
-    res.status(500).json({ error: 'Failed to process lead' });
-  }
-});
 
 app.listen(PORT, () => {
   console.log(\`Server running on port \${PORT}\`);
 });`,
 
   'backend/models/Lead.js': `import mongoose from 'mongoose';
-
-const leadSchema = new mongoose.Schema({
-  phone: {
-    type: String,
-    required: true
-  },
-  leadid_token: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  tcpa_consent: {
-    type: Boolean,
-    required: true
-  },
-  timestamp: {
     type: Date,
     default: Date.now
   }
@@ -191,18 +146,6 @@ function App() {
       
       <script id="LeadiDscript" type="text/javascript" dangerouslySetInnerHTML={{
         __html: \`
-          (function() {
-            var s = document.createElement('script');
-            s.id = 'LeadiDscript_campaign';
-            s.type = 'text/javascript';
-            s.async = true;
-            s.src = '//create.lidstatic.com/campaign/0ac017a5-bb32-67f9-1782-29ad33d047d7.js?snippet_version=2';
-            var LeadiDscript = document.getElementById('LeadiDscript');
-            LeadiDscript.parentNode.insertBefore(s, LeadiDscript);
-          })();
-        \`
-      }} />
-      <noscript>
         <img
           src="//create.leadid.com/noscript.gif?lac=A1E05D16-D3EF-C6AA-0F52-3C4598522A80&lck=0ac017a5-bb32-67f9-1782-29ad33d047d7&snippet_version=2"
           alt=""
@@ -281,22 +224,6 @@ export default function LeadForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const leadidToken = document.getElementById('leadid_token')?.getAttribute('value') || '';
-      
-      const response = await axios.post('https://health-enrollment-api-63cf21dd6ef9.herokuapp.com/api/submit-lead', {
-        phone,
-        leadid_token: leadidToken,
-        tcpa_consent: true
-      });
-
-      if (response.data.success) {
-        setPhone('');
-        alert('Thank you! We will contact you shortly.');
-      }
-    } catch (error) {
       console.error('Submission error:', error);
       alert('There was an error submitting your information. Please try again.');
     } finally {

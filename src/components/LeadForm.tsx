@@ -55,11 +55,9 @@ export default function LeadForm() {
     setIsSubmitting(true);
 
     try {
-      const leadidToken = document.getElementById('leadid_token')?.getAttribute('value') || '';
       const certUrl = (document.getElementsByName('xxTrustedFormCertUrl')[0] as HTMLInputElement)?.value || '';
       const formData = {
         phone,
-        leadid_token: leadidToken,
         tcpa_consent: true,
         trusted_form_cert_url: certUrl,
         timestamp: new Date().toISOString()
