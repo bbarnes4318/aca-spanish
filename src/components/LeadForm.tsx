@@ -38,31 +38,6 @@ export default function LeadForm() {
     };
   }, []);
 
-  const submitToGoogleSheets = async (formData: any) => {
-    const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; // Replace with your web app URL
-    
-    await fetch(scriptURL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData)
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const certUrl = (document.getElementsByName('xxTrustedFormCertUrl')[0] as HTMLInputElement)?.value || '';
-      const formData = {
-        phone,
-        tcpa_consent: true,
-        trusted_form_cert_url: certUrl,
-        timestamp: new Date().toISOString()
-      };
-      
       // Submit to your API
       const response = await fetch('/api/submit-lead', {
         method: 'POST',
@@ -75,9 +50,6 @@ export default function LeadForm() {
       if (!response.ok) {
         throw new Error('Failed to submit to API');
       }
-
-      // Submit to Google Sheets
-      await submitToGoogleSheets(formData);
 
       setPhone('');
       alert(t('form.success'));
