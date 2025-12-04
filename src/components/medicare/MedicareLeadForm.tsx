@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Phone, User, Calendar } from 'lucide-react';
-import { useMedicareLanguage } from '../contexts/MedicareLanguageContext';
+import { useMedicareLanguage } from '../../contexts/MedicareLanguageContext';
 
 export default function MedicareLeadForm() {
   const { t } = useMedicareLanguage();

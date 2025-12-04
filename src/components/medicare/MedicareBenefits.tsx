@@ -1,6 +1,6 @@
 import React from 'react';
-import { Compare, Users, DollarSign, Heart } from 'lucide-react';
-import { useMedicareLanguage } from '../contexts/MedicareLanguageContext';
+import { ArrowRightLeft, Users, DollarSign, Heart } from 'lucide-react';
+import { useMedicareLanguage } from '../../contexts/MedicareLanguageContext';
 
 export default function MedicareBenefits() {
   const { t } = useMedicareLanguage();
@@ -9,7 +9,7 @@ export default function MedicareBenefits() {
     {
       titleKey: 'benefits.comparison.title',
       descriptionKey: 'benefits.comparison.description',
-      icon: Compare,
+      icon: ArrowRightLeft,
     },
     {
       titleKey: 'benefits.expert.title',
@@ -61,4 +61,3 @@ export default function MedicareBenefits() {
     </div>
   );
 }
-

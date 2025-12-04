@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMedicareLanguage } from '../contexts/MedicareLanguageContext';
+import { useMedicareLanguage } from '../../contexts/MedicareLanguageContext';
 
 export default function MedicareHero() {
   const { t } = useMedicareLanguage();

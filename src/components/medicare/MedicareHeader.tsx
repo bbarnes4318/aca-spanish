@@ -1,6 +1,6 @@
 import React from 'react';
 import { Shield, Languages } from 'lucide-react';
-import { useMedicareLanguage } from '../contexts/MedicareLanguageContext';
+import { useMedicareLanguage } from '../../contexts/MedicareLanguageContext';
 
 export default function MedicareHeader() {
   const { t, language, toggleLanguage } = useMedicareLanguage();
