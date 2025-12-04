@@ -17,7 +17,7 @@ export default function MedicareLeadForm() {
     try {
       const leadidToken = document.getElementById('leadid_token')?.getAttribute('value') || '';
       
-      const response = await fetch('https://health-enrollment-api-63cf21dd6ef9.herokuapp.com/api/submit-lead', {
+      const response = await fetch('/api/submit-lead', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -66,7 +66,7 @@ export default function LeadForm() {
       };
       
       // Submit to your API
-      const response = await fetch('https://health-enrollment-api-63cf21dd6ef9.herokuapp.com/api/submit-lead', {
+      const response = await fetch('/api/submit-lead', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
