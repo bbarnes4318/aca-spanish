@@ -39,16 +39,15 @@ app.use(express.json());
 
 app.post("/api/submit-lead", async (req, res) => {
   try {
-    const { phone, leadid_token, tcpa_consent } = req.body;
+    const { phone, tcpa_consent } = req.body;
 
-    if (!phone || !leadid_token || tcpa_consent !== true) {
+    if (!phone || tcpa_consent !== true) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
     // Store the lead data
     const lead = {
       phone,
-      leadid_token,
       tcpa_consent,
       timestamp: new Date().toISOString(),
     };
@@ -57,7 +56,6 @@ app.post("/api/submit-lead", async (req, res) => {
 
     res.json({
       success: true,
-      lead_id: leadid_token,
       timestamp: lead.timestamp,
     });
   } catch (error) {
